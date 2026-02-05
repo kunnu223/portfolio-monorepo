@@ -16,7 +16,27 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      const allowedOrigins = [
+        process.env.FRONTEND_URL,
+        "http://localhost:3000",
+        "https://portfolio-monorepo-frontend-two.vercel.app", // Add your actual Vercel URL here
+      ];
+
+      // Also allow Vercel preview deployments
+      if (allowedOrigins.includes(origin) || origin.endsWith(".vercel.app")) {
+        return callback(null, true);
+      }
+
+      // For strictly blocking unknown origins in production, uncomment the error
+      // return callback(new Error('Not allowed by CORS'));
+
+      // For now, during setup, we can default to allow if mostly public
+      return callback(null, true);
+    },
     credentials: true,
   }),
 );
