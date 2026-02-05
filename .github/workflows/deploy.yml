@@ -11,12 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Render Deploy
-        # We use a simple curl request to the Render Deploy Hook URL
-        # You must set RENDER_DEPLOY_HOOK in GitHub Secrets
         env:
-          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
-        if: ${{ env.DEPLOY_HOOK != '' }}
-        run: curl -X POST $DEPLOY_HOOK
+          DEPLOY_URL: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: |
+          if [ -n "$DEPLOY_URL" ]; then
+            curl -X POST "$DEPLOY_URL"
+          else
+            echo "::warning::RENDER_DEPLOY_HOOK not set, skipping backend deploy"
+          fi
 
   deploy-frontend:
     name: Deploy Frontend (Vercel)
