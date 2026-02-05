@@ -13,11 +13,11 @@ jobs:
       - name: Trigger Render Deploy
         # We use a simple curl request to the Render Deploy Hook URL
         # You must set RENDER_DEPLOY_HOOK in GitHub Secrets
-        if: secrets.RENDER_DEPLOY_HOOK != ''
+        if: ${{ secrets.RENDER_DEPLOY_HOOK != '' }}
         run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
 
       - name: Warn if Secret Missing
-        if: secrets.RENDER_DEPLOY_HOOK == ''
+        if: ${{ secrets.RENDER_DEPLOY_HOOK == '' }}
         run: echo "::warning::RENDER_DEPLOY_HOOK secret is missing. Skipping backend deploy."
 
   deploy-frontend:
