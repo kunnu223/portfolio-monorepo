@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: oklch(0.97 0.01 240);
+  --color-brand-100: oklch(0.91 0.02 240);
+  --color-brand-200: oklch(0.82 0.04 240);
+  --color-brand-300: oklch(0.7 0.07 240);
+  --color-brand-400: oklch(0.58 0.11 240);
+  --color-brand-500: oklch(0.5 0.15 240);
+  --color-brand-600: oklch(0.42 0.14 240);
+  --color-brand-700: oklch(0.35 0.12 240);
+  --color-brand-800: oklch(0.28 0.1 240);
+  --color-brand-900: oklch(0.2 0.07 240);
+  --color-brand-950: oklch(0.13 0.05 240);
+
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+  100% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.6); }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+:root {
+  --background: #030712;
+  --foreground: #f3f4f6;
+  --primary: #6366f1;
+  --secondary: #a855f7;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--primary), var(--secondary));
+  border-radius: 4px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(ellipse 80% 80% at 50% -20%, rgba(99, 102, 241, 0.1), transparent),
+    radial-gradient(ellipse 60% 60% at 100% 100%, rgba(168, 85, 247, 0.05), transparent);
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient Text */
+.text-gradient {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #6366f1 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Glow Card Effect */
+.glow-card {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.glow-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, #6366f1, #a855f7, #6366f1);
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  filter: blur(8px);
+}
+
+.glow-card:hover::before {
+  opacity: 0.4;
+}
+
+.glow-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Shimmer Effect */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* Gradient Border */
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* Selection */
+::selection {
+  background: var(--primary);
+  color: white;
+}
+
+/* Focus States */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Link Hover Effect */
+a {
+  position: relative;
+}
+
+/* Section Dividers */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(99, 102, 241, 0.3),
+    transparent
+  );
+}
+
+/* Animated Gradient Background */
+.animated-gradient {
+  background: linear-gradient(-45deg, #6366f1, #a855f7, #6366f1, #a855f7);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* Noise Texture Overlay */
+.noise-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+}

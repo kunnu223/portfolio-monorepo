@@ -1,0 +1,16 @@
+{
+  "name": "portfolio-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:frontend": "npm run dev --workspace=@portfolio/frontend",
+    "dev:backend": "npm run dev --workspace=@portfolio/backend",
+    "dev": "npx concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "install:all": "npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
