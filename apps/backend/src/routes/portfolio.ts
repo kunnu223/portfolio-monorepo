@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
     // 1. Try fetching from MongoDB first
     if (isConnected()) {
       try {
-        mongoData = await Portfolio.findOne().lean();
+        mongoData = await (Portfolio as any).findOne().lean();
         if (mongoData) {
           console.log("Fetching portfolio data from MongoDB");
           return res.json(mongoData);
@@ -61,7 +61,7 @@ router.post("/", auth, async (req, res) => {
     // 2. Update MongoDB if connected (Secondary)
     if (isConnected()) {
       try {
-        await Portfolio.findOneAndUpdate({}, portfolioData, {
+        await (Portfolio as any).findOneAndUpdate({}, portfolioData, {
           new: true,
           upsert: true,
           setDefaultsOnInsert: true,
