@@ -18,7 +18,7 @@ export const site = {
   resumeUrl: "/resume.pdf" as string | null,
   available: "Open to full-stack + AI roles",
   relocate: "open to relocating",
-  url: "https://portfolio-monorepo-frontend-two.vercel.app",
+  url: "https://kunalkumawat.vercel.app",
 };
 
 export const hero = {
