@@ -1,44 +1,38 @@
-"use client";
+import type { Viewport } from "next";
+import Link from "next/link";
+import Hud from "@/components/world/Hud";
+import WorldLoader from "@/components/world/WorldLoader";
+import { hero, site } from "@/lib/content";
 
-import { useState, useEffect } from "react";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Experience from "@/components/Experience";
-import Skills from "@/components/Skills";
-import Projects from "@/components/Projects";
-import Education from "@/components/Education";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-import LoadingScreen from "@/components/LoadingScreen";
-import ScrollProgress from "@/components/ScrollProgress";
-import ScrollToTop from "@/components/ScrollToTop";
-import ParticleBackground from "@/components/ParticleBackground";
+export const viewport: Viewport = {
+  themeColor: "#9fd3db",
+  // draw under the notch / home bar; the overlay pads itself with safe-area insets
+  viewportFit: "cover",
+};
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate initial load
-    const timer = setTimeout(() => setIsLoading(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
-    <>
-      <LoadingScreen isLoading={isLoading} />
-      <ParticleBackground />
-      <ScrollProgress />
-      <main className="min-h-screen relative z-10">
-        <Navbar />
-        <Hero />
-        <Experience />
-        <Skills />
-        <Projects />
-        <Education />
-        <Contact />
-        <Footer />
-      </main>
-      <ScrollToTop />
-    </>
+    <main className="fixed inset-0 overflow-hidden bg-[#9fd3db]">
+      <h1 className="sr-only">
+        {site.name}, full-stack engineer who builds AI agents that ship to production
+      </h1>
+      <p className="sr-only">
+        {hero.intro} This page is a small island you can drive around. Every place on it opens part of my
+        work. The same content is also on the <Link href="/read">read-mode page</Link>.
+      </p>
+      <WorldLoader />
+      <Hud />
+      <noscript>
+        <div className="fixed inset-0 z-[70] grid place-items-center bg-[#9fd3db] p-6 text-center text-[#23232b]">
+          <div>
+            <div className="font-display text-5xl font-bold tracking-tight">{site.name}</div>
+            <p className="mt-4">The island needs JavaScript.</p>
+            <Link href="/read" className="mt-6 inline-block underline underline-offset-4">
+              Open the read-mode page
+            </Link>
+          </div>
+        </div>
+      </noscript>
+    </main>
   );
 }
