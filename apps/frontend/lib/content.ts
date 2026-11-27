@@ -14,8 +14,8 @@ export const site = {
   email: "kunalkumawat223@gmail.com",
   github: "https://github.com/kunnu223",
   linkedin: "https://www.linkedin.com/in/kunal-kumawat-7b99061ba/",
-  /** Set to a PDF path (e.g. "/resume.pdf") once the current resume is ready; null hides the button. */
-  resumeUrl: null as string | null,
+  /** The current resume (copy of switch-mission/resume/Kunal_Kumawat_Resume.pdf); null hides the button. */
+  resumeUrl: "/resume.pdf" as string | null,
   available: "Open to full-stack + AI roles",
   relocate: "open to relocating",
   url: "https://portfolio-monorepo-frontend-two.vercel.app",
@@ -191,7 +191,8 @@ export const stack: StackGroup[] = [
     items: [
       { label: "OpenAI · Anthropic · Gemini · Groq APIs", level: "daily" },
       { label: "Vercel AI SDK", level: "daily" },
-      { label: "Agents & tool calling", level: "daily" },
+      { label: "AI agents", level: "daily" },
+      { label: "Tool calling", level: "working" },
       { label: "Structured output · code checks", level: "daily" },
     ],
   },
@@ -219,10 +220,8 @@ export const stack: StackGroup[] = [
       { label: "MongoDB", level: "daily" },
       { label: "PostgreSQL · MySQL · Prisma", level: "working" },
       { label: "Directus CMS", level: "working" },
-      { label: "Redis", level: "working" },
-      { label: "Cloudflare Workers · Vercel", level: "working" },
-      { label: "Docker · AWS", level: "working" },
-      { label: "Python", level: "working" },
+      { label: "Cloudflare Workers · D1 · Vercel", level: "working" },
+      { label: "Docker", level: "working" },
     ],
   },
 ];
